@@ -42,7 +42,7 @@ public class DatumAuswaehlWerkzeug extends Beobachtbar
         _ausgewaehltesDatum = _ausgewaehltesDatum.vorherigerTag();
         _ui.getDatumLabel()
                 .setText(_ausgewaehltesDatum.getFormatiertenString());
-        meldeAenderung();
+        datumWurdeGeaendert();
     }
 
     /**
@@ -53,7 +53,7 @@ public class DatumAuswaehlWerkzeug extends Beobachtbar
         _ausgewaehltesDatum = _ausgewaehltesDatum.naechsterTag();
         _ui.getDatumLabel()
                 .setText(_ausgewaehltesDatum.getFormatiertenString());
-        meldeAenderung();
+        datumWurdeGeaendert();
     }
 
     /**
@@ -100,5 +100,13 @@ public class DatumAuswaehlWerkzeug extends Beobachtbar
                 weiterButtonWurdeGedrueckt();
             }
         });
+    }
+    
+    /**
+     * Diese Methode wird aufgerufen, wenn das Datum geändert wurde.
+     */
+    private void datumWurdeGeaendert()
+    {
+        meldeAenderung();
     }
 }
