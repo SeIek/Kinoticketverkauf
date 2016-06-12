@@ -20,12 +20,26 @@ public class BeobachterTestOliver
     {
         int _counter = 0;
 
+        /**
+         * Wird aufgerufen sobald beobachtete Subwerkzeuge eine Änderung melden.
+         * 
+         * @param quelle Die Quelle der Änderung
+         * 
+         * @require quelle != null
+         */
         @Override
         public void beachteAenderung(Beobachtbar quelle)
         {
+            assert quelle != null : "Vorbedingung verletzt: quelle != null";
+            
             _counter++;
         }
 
+        /**
+         * Gibt die Anzahl der Aufrufe zu Testzwecken zurück
+         * 
+         * @return Die Anzahl der Aufrufe
+         */
         public int getCounter()
         {
             return _counter;
@@ -34,6 +48,9 @@ public class BeobachterTestOliver
 
     private class MyBeobachtbar extends Beobachtbar
     {
+        /**
+         * Meldet eine Änderung an die Beobachter
+         */
         public void Change()
         {
             meldeAenderung();
