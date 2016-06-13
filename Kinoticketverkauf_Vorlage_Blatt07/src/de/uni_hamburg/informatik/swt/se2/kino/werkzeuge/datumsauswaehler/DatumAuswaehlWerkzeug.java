@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.swt.se2.kino.entwurfsmuster.beobachter.Beobachtbar;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Datum;
-import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.beobachter.Beobachtbar;
 
 /**
  * Mit diesem Werkzeug kann ein Datum ausgewählt werden.

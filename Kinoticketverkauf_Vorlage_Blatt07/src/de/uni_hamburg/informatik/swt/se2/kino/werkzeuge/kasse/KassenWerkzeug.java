@@ -3,12 +3,12 @@ package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.kasse;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import de.uni_hamburg.informatik.swt.se2.kino.entwurfsmuster.beobachter.Beobachtbar;
+import de.uni_hamburg.informatik.swt.se2.kino.entwurfsmuster.beobachter.Beobachter;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Datum;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kino;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Tagesplan;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
-import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.beobachter.Beobachtbar;
-import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.beobachter.Beobachter;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.datumsauswaehler.DatumAuswaehlWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.platzverkauf.PlatzVerkaufsWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.VorstellungsAuswaehlWerkzeug;
@@ -47,7 +47,6 @@ public class KassenWerkzeug implements Beobachter
 
         _kino = kino;
 
-
         // Subwerkzeuge erstellen
         _platzVerkaufsWerkzeug = new PlatzVerkaufsWerkzeug();
         _datumAuswaehlWerkzeug = new DatumAuswaehlWerkzeug();
@@ -59,10 +58,10 @@ public class KassenWerkzeug implements Beobachter
                 _vorstellungAuswaehlWerkzeug.getUIPanel());
 
         registriereUIAktionen();
-        
+
         // Als Beobachter an Subwerkzeugen registrieren
         registriereAlsBeobachter();
-        
+
         // TODO Folgende 2 Zeilen wandern dann vermutlich in beachteAenderung()
         // hier aber zur initialisierung ebenso erforderlich?
         // Mal testen ob bachteAenderung auch schon durch das Erzeugen des
@@ -78,14 +77,15 @@ public class KassenWerkzeug implements Beobachter
      */
     private void registriereUIAktionen()
     {
-        _ui.getBeendenButton().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        _ui.getBeendenButton()
+            .addActionListener(new ActionListener()
             {
-                reagiereAufBeendenButton();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    reagiereAufBeendenButton();
+                }
+            });
     }
 
     /**
@@ -139,24 +139,20 @@ public class KassenWerkzeug implements Beobachter
         _datumAuswaehlWerkzeug.setzeBeobachter(this);
         _vorstellungAuswaehlWerkzeug.setzeBeobachter(this);
     }
-    
+
     /**
      * Wird aufgerufen sobald beobachtete Subwerkzeuge eine Änderung melden.
      * 
      * @param quelle Die Quelle der Änderung
-     * 
-     * @require quelle != null
      */
     @Override
     public void beachteAenderung(Beobachtbar quelle)
     {
-        assert quelle != null : "Vorbedingung verletzt: quelle != null";
-        
         if (quelle == _datumAuswaehlWerkzeug)
         {
             // TODO Auf Änderungen vom DatumAuswaelWerkzeug reagieren
             setzeTagesplanFuerAusgewaehltesDatum();
-            
+
         }
         else if (quelle == _vorstellungAuswaehlWerkzeug)
         {

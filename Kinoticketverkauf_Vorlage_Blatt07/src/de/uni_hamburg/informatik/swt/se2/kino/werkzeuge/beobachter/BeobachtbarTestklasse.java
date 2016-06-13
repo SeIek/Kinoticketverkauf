@@ -1,6 +1,0 @@
-package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.beobachter;
-
-public class BeobachtbarTestklasse extends Beobachtbar
-{
-
-}

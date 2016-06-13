@@ -1,6 +1,6 @@
-package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.beobachter;
+package de.uni_hamburg.informatik.swt.se2.kino.entwurfsmuster.beobachter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -24,14 +24,10 @@ public class BeobachterTestOliver
          * Wird aufgerufen sobald beobachtete Subwerkzeuge eine Änderung melden.
          * 
          * @param quelle Die Quelle der Änderung
-         * 
-         * @require quelle != null
          */
         @Override
         public void beachteAenderung(Beobachtbar quelle)
         {
-            assert quelle != null : "Vorbedingung verletzt: quelle != null";
-            
             _counter++;
         }
 
@@ -51,7 +47,7 @@ public class BeobachterTestOliver
         /**
          * Meldet eine Änderung an die Beobachter
          */
-        public void Change()
+        public void change()
         {
             meldeAenderung();
         }
@@ -85,7 +81,7 @@ public class BeobachterTestOliver
 
         for (int i = 0; i < ANZAHLTESTAENDERUNGEN; i++)
         {
-            _beobachtete[0].Change();
+            _beobachtete[0].change();
         }
 
         assertEquals(ANZAHLTESTAENDERUNGEN, _beobachter[0].getCounter());
@@ -94,7 +90,7 @@ public class BeobachterTestOliver
     @Test
     public void testAenderungenKommenAnAllenBeobachternAn()
     {
-        _beobachtete[0].meldeAenderung();
+        _beobachtete[0].change();
 
         int angekommenBei = 0;
         for (int i = 0; i < ANZAHLBEOBACHTER; i++)
@@ -110,7 +106,7 @@ public class BeobachterTestOliver
     {
         for (int i = 0; i < ANZAHLBEOBACHTETE; i++)
         {
-            _beobachtete[i].Change();
+            _beobachtete[i].change();
         }
 
         assertEquals(ANZAHLBEOBACHTETE, _beobachter[0].getCounter());
